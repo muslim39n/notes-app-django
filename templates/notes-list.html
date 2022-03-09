@@ -8,9 +8,11 @@
 </head>
 <body>
     {% for note in notes %}
-        <h1>
-            {{ note.name }}
-        </h1>
+        <div style="background-color: {{ note.get_color_display }};">
+            <h1>
+                <a href="{% url 'notes:note-detail' note.pk %}">{{ note.name }}</a>            
+            </h1>
+        </div>
     {% endfor %}
 </body>
 </html>

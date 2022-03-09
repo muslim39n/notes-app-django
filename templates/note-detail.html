@@ -8,6 +8,24 @@
 </head>
 <body>
     <h1>Name: {{ note.name }}</h1>
-    <p>Color: {{ note.color }}</p>
+    <p>Color: {{ note.get_color_display }}</p>
+    <ul>
+    {% for paragraph in note.paragraphs.all %}
+        <li>
+            <form action="{% url 'notes:edit-paragraph' note.pk paragraph.pk %}" method="post">
+                {% csrf_token %}
+                <textarea name="body" cols="60" rows="10">{{ paragraph.body }}</textarea>
+                <input type="submit" value="Save">
+            </form>
+            <br>
+        </li>
+    {% endfor %}
+        <li>
+            <form action="{% url 'notes:new-paragraph' note.pk %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="New paragraph">
+            </form>
+        </li>
+    </ul>
 </body>
 </html>

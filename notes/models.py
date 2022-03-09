@@ -16,3 +16,14 @@ class Note(models.Model):
 
     def __str__(self):
         return self.name
+
+class NoteParagraph(models.Model):
+    note = models.ForeignKey(Note, on_delete=models.CASCADE, 
+                            related_name='paragraphs')
+    body = models.TextField(blank=True)
+    time_create = models.DateTimeField(auto_now_add=True)
+    time_update = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.body[:50]
